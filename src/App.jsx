@@ -40,6 +40,25 @@ export default function App() {
     setForceTouchControls(isTouchDevice);
   }, []);
 
+  // Controlar el scroll de la página para que en menús se pueda desplazar verticalmente
+  // y en el juego esté totalmente bloqueado
+  useEffect(() => {
+    if (screen === 'game') {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [screen]);
+
   const handleFacesComplete = (danteFace, francescaFace) => {
     setFaces({ dante: danteFace, francesca: francescaFace });
     setScreen('selection');
