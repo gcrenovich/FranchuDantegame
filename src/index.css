@@ -1,0 +1,268 @@
+/* Variables de diseño - Paleta Arcade Premium y Animaciones */
+:root {
+  /* HSL Colores */
+  --bg-gradient: linear-gradient(135deg, #0f0c1b 0%, #1a103c 50%, #0c091f 100%);
+  --grid-color: rgba(147, 51, 234, 0.08);
+  
+  --primary: 270 95% 65%;       /* Púrpura brillante */
+  --secondary: 195 100% 50%;    /* Celeste neón */
+  --accent: 330 100% 60%;       /* Rosa mágico */
+  --success: 145 80% 50%;       /* Verde victoria */
+  --warning: 45 100% 55%;       /* Naranja advertencia / Monedas */
+  --danger: 355 90% 60%;        /* Rojo barril */
+  
+  --text-primary: 0 0% 100%;
+  --text-secondary: 260 20% 80%;
+  
+  /* Fuentes */
+  --font-modern: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-retro: 'Press Start 2P', monospace;
+  
+  /* Sombras y Vidrio */
+  --glass-bg: rgba(26, 21, 44, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --neon-glow-primary: 0 0 15px rgba(168, 85, 247, 0.6);
+  --neon-glow-secondary: 0 0 15px rgba(6, 182, 212, 0.6);
+}
+
+/* Reset de estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-modern);
+  background: var(--bg-gradient);
+  color: hsl(var(--text-primary));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Rejilla de fondo retro de neón */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tipografías Especiales */
+.retro-title {
+  font-family: var(--font-retro);
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px hsl(var(--primary)),
+    0 0 20px hsl(var(--primary)),
+    0 0 40px hsl(var(--primary));
+  animation: pulse-glow 2s infinite ease-in-out;
+  letter-spacing: 2px;
+}
+
+.modern-subtitle {
+  font-size: 1.1rem;
+  color: hsl(var(--text-secondary));
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* Tarjetas de Vidrio (Glassmorphism) */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+  padding: 30px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(168, 85, 247, 0.15);
+}
+
+/* Botones Premium */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  padding: 14px 28px;
+  font-family: var(--font-modern);
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6), var(--neon-glow-primary);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  color: white;
+  padding: 14px 28px;
+  font-family: var(--font-modern);
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Animaciones y Efectos */
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 4px #fff,
+      0 0 8px hsl(var(--primary)),
+      0 0 16px hsl(var(--primary)),
+      0 0 30px hsl(var(--primary));
+  }
+  50% {
+    text-shadow: 
+      0 0 6px #fff,
+      0 0 15px hsl(var(--secondary)),
+      0 0 30px hsl(var(--secondary)),
+      0 0 50px hsl(var(--secondary));
+  }
+}
+
+.float-animation {
+  animation: float 4s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Contenedor de Pantallas */
+.screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Aspectos del Editor de Rostro */
+.cropper-container {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 4px dashed hsl(var(--secondary));
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.cropper-container:active {
+  cursor: grabbing;
+}
+
+.cropper-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 9999px rgba(15, 12, 27, 0.7);
+  pointer-events: none;
+  border: 3px solid hsl(var(--secondary));
+}
+
+.scale-slider {
+  width: 100%;
+  margin: 15px 0;
+  accent-color: hsl(var(--secondary));
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Media Queries para Pantallas Pequeñas */
+@media (max-width: 640px) {
+  .retro-title {
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+  }
+  .glass-card {
+    padding: 20px;
+  }
+}
